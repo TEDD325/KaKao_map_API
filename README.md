@@ -50,17 +50,6 @@ kakaomap URL(장소 URL):exit -> exit 입력하면 프로그램이 종료된다.
 
 프로그램 종료
 ```
-## 실행화면
-### 입력화면
-![InputScreen](https://github.com/FastCampusKDTBackend/KDT_Y_BE_Java_Assignment1/blob/KwonDoHyung/%EA%B3%BC%EC%A0%9C1/InputScreen.png?raw=true)
-
-![OutputScreen](https://github.com/FastCampusKDTBackend/KDT_Y_BE_Java_Assignment1/blob/KwonDoHyung/%EA%B3%BC%EC%A0%9C1/OutputScreen.png?raw=true)
-
-
-## 브라우저 실행시 보여지는 화면 예
-> kakaomap URL(장소 URL): http://place.map.kakao.com/16507221
-![BrowserScreen](https://github.com/FastCampusKDTBackend/KDT_Y_BE_Java_Assignment1/blob/KwonDoHyung/%EA%B3%BC%EC%A0%9C1/BrowserScreen.png?raw=true)
-
 
 ## 의존성
 - httpclient (4.5.13)
