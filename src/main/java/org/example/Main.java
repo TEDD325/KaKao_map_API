@@ -11,15 +11,23 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.List;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class Main {
 
     public static void main(String[] args) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-            String keyFilePath = "./KaKao_API_Key.json";
-            String keyFileMeta = "key";
+            // 기존 dotenv 사용 코드 제거
+            // Dotenv dotenv = Dotenv.load();
+            // String apiKey = dotenv.get("KAKAO_API_KEY");
 
-            KakaoAPIConnector conn = new KakaoAPIConnector(keyFilePath, keyFileMeta);
+            // 환경 변수에서 직접 읽기
+            String apiKey = System.getenv("KAKAO_API_KEY");
+            if (apiKey == null || apiKey.isEmpty()) {
+                throw new RuntimeException("환경 변수 'KAKAO_API_KEY'가 설정되지 않았습니다.");
+            }
+
+            KakaoAPIConnector conn = new KakaoAPIConnector(apiKey);
             MapInfo mapInfo;
 
             // Set API configuration
@@ -37,8 +45,8 @@ public class Main {
             mapInfo = getMapInfo(conn, fullUrl);
             List<Float> currentLoc = mapInfo.getCurrentLoc();
 
-            String encodedLocX = URLEncoder.encode(String.valueOf(currentLoc.get(0)));
-            String encodedLocY = URLEncoder.encode(String.valueOf(currentLoc.get(1)));
+            String encodedLocX = URLEncoder.encode(String.valueOf(currentLoc.get(0)), "UTF-8");
+            String encodedLocY = URLEncoder.encode(String.valueOf(currentLoc.get(1)), "UTF-8");
             String encodedRad = URLEncoder.encode(String.valueOf(rad), "UTF-8");
             String fullApiUrl = apiURL + "&x=" + encodedLocX + "&y=" + encodedLocY + "&radius=" + encodedRad;
             mapInfo = getMapInfo(conn, fullApiUrl);

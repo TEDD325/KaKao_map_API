@@ -1,38 +1,46 @@
 package API;
 
-import lombok.*;
-import model.KeyCaller;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class KakaoAPIConnector {
-    private String keyFilePath;        // API 키 파일 경로
-    private String keyFileMeta;        // API 키 파일 메타 정보
-    private String responseData;       // API 응답 데이터
+    private String responseData;  // API 응답 데이터
+    private String restApiKey;    // REST API 키
 
-    @Getter(value = AccessLevel.NONE)
-    private String restApiKey;         // REST API 키
-
-    public KakaoAPIConnector(String keyFilePath, String keyFileMeta) {
-        this.keyFilePath = keyFilePath;
-        this.keyFileMeta = keyFileMeta;
+    // 기본 생성자
+    public KakaoAPIConnector() {
     }
 
-    private String callAPIKey(String keyFilePath, String keyFileMeta) throws IOException {
-        return KeyCaller.call(keyFilePath, keyFileMeta);   // API 키를 가져오는 메서드 호출
+    // 환경 변수에서 API 키를 직접 받는 생성자
+    public KakaoAPIConnector(String apiKey) {
+        if (apiKey == null || apiKey.isEmpty()) {
+            throw new IllegalArgumentException("API 키가 설정되지 않았습니다.");
+        }
+        this.restApiKey = apiKey;
     }
 
+    // Getter 및 Setter
+    public String getResponseData() {
+        return responseData;
+    }
+
+    public void setResponseData(String responseData) {
+        this.responseData = responseData;
+    }
+
+    public String getRestApiKey() {
+        return restApiKey;
+    }
+
+    public void setRestApiKey(String restApiKey) {
+        this.restApiKey = restApiKey;
+    }
+
+    // API 호출 메서드
     public String connect(String apiURL, String requestMethod) throws IOException {
-        // REST API 키를 가져옴
-        String restApiKey = this.callAPIKey(keyFilePath, keyFileMeta);
-
         // URL 연결 설정
         URL url = new URL(apiURL);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
