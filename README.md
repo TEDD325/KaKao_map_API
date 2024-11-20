@@ -59,14 +59,14 @@ kakaomap URL(장소 URL):exit -> exit 입력하면 프로그램이 종료된다.
 
 ## Troubleshooting
 - 로컬 실행
-  - mvn compile exec:java -Dexec.mainClass="org.example.Main"
+  - `mvn compile exec:java -Dexec.mainClass="org.example.Main"`
 - pom.xml 파일 변경 또는 프로젝트 이름 변경 시
-  - mvn clean package
-  - jar tf target/Find_Pharn_Near_Me-1.0-SNAPSHOT.jar
-  - jar xf target/Find_Pharn_Near_Me-1.0-SNAPSHOT.jar META-INF/MANIFEST.MF\ncat META-INF/MANIFEST.MF\n
-  - export KAKAO_API_KEY=YOUR_KEY
-  - java -jar target/Find_Pharn_Near_Me-1.0-SNAPSHOT.jar
+  - `mvn clean package`
+  - `jar tf target/Find_Pharn_Near_Me-1.0-SNAPSHOT.jar`
+  - `jar xf target/Find_Pharn_Near_Me-1.0-SNAPSHOT.jar META-INF/MANIFEST.MF\ncat META-INF/MANIFEST.MF`
+  - `export KAKAO_API_KEY=YOUR_KEY`
+  - `java -jar target/Find_Pharn_Near_Me-1.0-SNAPSHOT.jar`
 - 도커 이미지 생성 및 실행 시
   - .env 필요
-  - docker build -t find_pharm_near_me_app_image .
-  - docker run -it --env-file .env find_pharm_near_me_app_image
+  - `docker build -t find_pharm_near_me_app_image .`
+  - `docker run -it --env-file .env find_pharm_near_me_app_image`
